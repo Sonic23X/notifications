@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\V1;
 
 use App\Http\Resources\V1\CategoryResource;
 use App\Interfaces\V1\CategoryInterface;
 use App\Models\V1\Category;
 
-class CategoryRepository extends CategoryInterface
+class CategoryRepository implements CategoryInterface
 {
-    public function all() {
-        return CategoryResource::collection(Category::all());
+    public function all(): CategoryResource
+    {
+        return CategoryResource::make(Category::all());
     }
 }

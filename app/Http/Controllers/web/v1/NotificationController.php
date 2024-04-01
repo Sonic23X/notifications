@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\web\v1;
+namespace App\Http\Controllers\web\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\CreateNotificationRequest;
-use App\Repositories\NotificationRepository;
-use App\Repositories\CategoryRepository;
+use App\Repositories\V1\NotificationRepository;
+use App\Repositories\V1\CategoryRepository;
 use App\Enums\NotificationType;
 use Inertia\Inertia;
 use Inertia\Response;
