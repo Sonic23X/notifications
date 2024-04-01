@@ -11,9 +11,9 @@ enum NotificationType: string
     public static function getAllValuesAsString(): string
     {
         return implode(',', [
-            self::Sms,
-            self::Email,
-            self::Push,
+            self::Sms->value,
+            self::Email->value,
+            self::Push->value,
         ]);
     }
 

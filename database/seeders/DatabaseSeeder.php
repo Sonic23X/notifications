@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
-            'suscribed_to' => json_encode([$sports->uuid, $finances->uuid]),
+            'suscribed_to' => json_encode([$sports->id, $finances->id]),
         ]);
     }
 }

@@ -8,8 +8,15 @@ use App\Models\V1\Category;
 
 class CategoryRepository implements CategoryInterface
 {
-    public function all(): CategoryResource
+    // To-DO: Revisar porque no se está retornando correctamente el CategoryResource
+    // Posiblemente por cambio en la versión de Laravel
+    public function all()
     {
-        return CategoryResource::make(Category::all());
+        return CategoryResource::collection(Category::all())->resolve();
+    }
+
+    public function findOne(string $uuid)
+    {
+        return CategoryResource::make(Category::where('uuid', $uuid)->firstOrFail());
     }
 }

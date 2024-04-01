@@ -37,7 +37,7 @@ class NotificationController extends Controller
     {
         return Inertia::render('V1/Notification/Create',
             [
-                'notificationCollection' => $this->categoryRepository->all(),
+                'categoryCollection' => $this->categoryRepository->all(),
                 'typeCollection' => NotificationType::getValues()
             ]);
     }
@@ -47,6 +47,11 @@ class NotificationController extends Controller
      */
     public function store(CreateNotificationRequest $request)
     {
-        //
+        $this->notificationRepository->create($request->validated());
+
+        return response()->json(['message' => 'Notification created successfully'], 201);
+        // TO-DO: revisar porque se regresa un json en lugar de un Inertia Page
+        // Uso de Axios en lugar de Inertia
+        //return Redirect::route('notification.index');
     }
 }

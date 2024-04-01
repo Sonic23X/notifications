@@ -6,7 +6,8 @@ use App\Http\Resources\V1\NotificationResource;
 
 interface NotificationInterface
 {
-    public function all(): NotificationResource;
+    //To-DO: Revisar porque no se está retornando correctamente el NotificationResource, funcionando bien como coleccion anonima
+    public function all();
 
     public function create(array $data): NotificationResource;
 }

@@ -6,5 +6,7 @@ use App\Http\Resources\V1\CategoryResource;
 
 interface CategoryInterface
 {
-    public function all(): CategoryResource;
+    public function all();
+
+    public function findOne(string $uuid);
 }

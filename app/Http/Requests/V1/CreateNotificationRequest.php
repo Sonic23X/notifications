@@ -25,7 +25,7 @@ class CreateNotificationRequest extends FormRequest
     {
         return [
             'category' => 'required|exists:categories,uuid',
-            'content' => 'required|string',
+            'content' => 'required|string|max:255|min:3',
             'type' => 'required|string|in:' . NotificationType::getAllValuesAsString()
         ];
     }
