@@ -21,14 +21,21 @@ class NotificationRepository implements NotificationInterface
         return NotificationResource::collection(Notification::all());
     }
 
+    public function findOne(string $uuid)
+    {
+        return NotificationResource::make(Notification::where('uuid', $uuid)->firstOrFail());
+    }
+
     public function create(array $data): NotificationResource
     {
-        $notification = [
+        $notificationData = [
             'content' => $data['content'],
             'category_id' => $this->categoryRepository->findOne($data['category'])->id,
             'type' => $data['type'],
         ];
 
-        return NotificationResource::make(Notification::create($notification));
+        $notification = Notification::create($notificationData);
+
+        return NotificationResource::make($notification->load('category'));
     }
 }

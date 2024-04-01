@@ -11,6 +11,19 @@ let props = defineProps({
 
 const notifications = ref(props.notificationCollection.data.map(notification => new Notification(notification)));
 
+const typeText = (typeNotification) => {
+    switch (typeNotification) {
+        case 'sms':
+            return 'SMS';
+        case 'push_notification':
+            return 'Notificación push';
+        case 'email':
+            return 'Correo electrónico';
+        default:
+            return 'Desconocido';
+    }
+};
+
 </script>
 
 <template>
@@ -52,7 +65,7 @@ const notifications = ref(props.notificationCollection.data.map(notification => 
                                         {{ notification.content }}
                                     </th>
                                     <td class="px-6 py-4">
-                                        {{ notification.type }}
+                                        {{ typeText(notification.type) }}
                                     </td>
                                     <td class="px-6 py-4">
                                         {{ notification.category.name }}
