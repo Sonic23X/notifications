@@ -74,8 +74,6 @@ const typeText = (typeNotification) => {
                             </tbody>
                         </table>
                     </div>
-
-
                 </div>
             </div>
         </div>

@@ -11,7 +11,7 @@ export default class Notification {
         /** @type string */
         this.type = params.type;
 
-        /** @type Role|null */
+        /** @type Category|null */
         this.category = params.category ? new Category(params.category) : null;
 
         /** @type string */

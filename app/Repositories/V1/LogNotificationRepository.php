@@ -2,6 +2,7 @@
 
 namespace App\Repositories\V1;
 
+use App\Http\Resources\V1\LogNotificationResource;
 use App\Interfaces\V1\LogNotificationInterface;
 use App\Models\V1\LogNotification;
 use App\Repositories\V1\NotificationRepository;
@@ -17,7 +18,7 @@ class LogNotificationRepository implements LogNotificationInterface
 
     public function all()
     {
-        return LogNotification::all();
+        return LogNotificationResource::collection(LogNotification::all())->resolve();
     }
 
     public function create(string $notification, string $user)
@@ -25,9 +26,9 @@ class LogNotificationRepository implements LogNotificationInterface
         $notification = $this->notificationRepository->findOne($notification);
         $user = $this->userRepository->findOne($user);
 
-        return LogNotification::create([
+        return LogNotificationResource::make(LogNotification::create([
             'notification_id' => $notification['id'],
             'user_id' => $user['id'],
-        ]);
+        ]))->resolve();
     }
 }
