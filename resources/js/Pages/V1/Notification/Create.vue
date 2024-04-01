@@ -51,7 +51,16 @@ const submit = () => {
             });
         })
         .catch(error => {
-            errors.value = error.response.data.errors;
+            if (error.response.status === 422) {
+                errors.value = error.response.data.errors;
+                return;
+            } else {
+                Swal.fire({
+                    title: "Error",
+                    text: "Ocurrió un error al registrar la notificación, intenta de nuevo más tarde",
+                    icon: "error",
+                });
+            }
         });
 };
 
