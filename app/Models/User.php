@@ -6,10 +6,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+
+    protected static function booted()
+    {
+        static::creating(function ($notification) {
+            $notification->uuid = (string) Str::uuid();
+        });
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -17,6 +25,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'uuid',
         'name',
         'email',
         'phone',
@@ -42,9 +51,7 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'password' => 'hashed',
-            'suscribed_to' => 'json',
-            'channels' => 'json',
+            'password' => 'hashed'
         ];
     }
 }
