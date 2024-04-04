@@ -7,6 +7,7 @@ use App\Interfaces\V1\LogNotificationInterface;
 use App\Models\V1\LogNotification;
 use App\Repositories\V1\NotificationRepository;
 use App\Repositories\V1\UserRepository;
+use Illuminate\Support\Facades\Log;
 
 class LogNotificationRepository implements LogNotificationInterface
 {
@@ -18,17 +19,18 @@ class LogNotificationRepository implements LogNotificationInterface
 
     public function all()
     {
-        return LogNotificationResource::collection(LogNotification::all())->resolve();
+        return LogNotificationResource::collection(LogNotification::orderBy('created_at', 'desc')->get())->resolve();
     }
 
     public function create(string $notification, string $user)
     {
-        $notification = $this->notificationRepository->findOne($notification);
-        $user = $this->userRepository->findOne($user);
+        Log::info($user . ' has been notified about notification ' . $notification);
+        $notification = $this->notificationRepository->getInternalId($notification);
+        $user = $this->userRepository->getInternalId($user);
 
         return LogNotificationResource::make(LogNotification::create([
-            'notification_id' => $notification['id'],
-            'user_id' => $user['id'],
+            'notification_id' => $notification,
+            'user_id' => $user,
         ]))->resolve();
     }
 }

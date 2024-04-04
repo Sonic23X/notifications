@@ -42,7 +42,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'suscribed_to' => json_encode([]),
-            'channels' => json_encode(NotificationType::getAllValuesAsString()),
+            'channels' => json_encode([NotificationType::Email, NotificationType::Sms, NotificationType::Push]),
         ]);
 
         event(new Registered($user));

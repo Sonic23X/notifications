@@ -20,4 +20,9 @@ class UserRepository implements UserInterface
                 ->get()
         )->resolve();
     }
+
+    public function getInternalId(string $uuid): int
+    {
+        return User::where('uuid', $uuid)->firstOrFail()->id;
+    }
 }

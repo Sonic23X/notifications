@@ -38,4 +38,9 @@ class NotificationRepository implements NotificationInterface
 
         return NotificationResource::make($notification->load('category'));
     }
+
+    public function getInternalId(string $uuid): int
+    {
+        return Notification::where('uuid', $uuid)->firstOrFail()->id;
+    }
 }

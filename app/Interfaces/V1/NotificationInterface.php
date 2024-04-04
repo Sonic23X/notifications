@@ -12,4 +12,6 @@ interface NotificationInterface
     public function findOne(string $uuid);
 
     public function create(array $data): NotificationResource;
+
+    public function getInternalId(string $uuid): int;
 }
